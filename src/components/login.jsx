@@ -1,10 +1,10 @@
-const Signup = () => {
+const Login = () => {
   return (
     <div
-      id="signup"
+      id="login"
       className="flex flex-col gap-y-6 justify-center px-4 md:px-20 lg:px-40"
     >
-      <h1 className="text-4xl">Sign Up</h1>
+      <h1 className="text-4xl">Sign In</h1>
       <form action="" className="flex flex-col gap-y-6">
         <span className="flex gap-y-2 flex-col">
           <label htmlFor="email">Email</label>
@@ -28,11 +28,11 @@ const Signup = () => {
         </span>
 
         <button className="bg-white text-black py-2 w-full rounded-lg">
-          Sign Up
+          Sign In
         </button>
       </form>
     </div>
   );
 };
 
-export default Signup;
+export default Login;

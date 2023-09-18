@@ -1,5 +1,6 @@
 import './App.css'
-import Signup from './components/signup'
+import Login from './components/login'
+// import Signup from './components/signup'
 import './styles/main.css'
 // import Preloader from './components/preloader'
 
@@ -7,7 +8,8 @@ function App() {
 
   return (
     <>
-    <Signup/>
+    <Login/>
+    {/* <Signup/> */}
      {/* <Preloader/> */}
     </>
   )
