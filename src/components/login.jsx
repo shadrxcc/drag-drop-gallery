@@ -14,7 +14,11 @@ const Login = () => {
       className="flex flex-col gap-y-6 justify-center px-4 md:px-20 lg:px-40"
     >
       <h1 className="text-4xl">Sign In</h1>
-      <form action="login" onSubmit={handleLogin} className="flex flex-col gap-y-6">
+      <form
+        action="login"
+        onSubmit={handleLogin}
+        className="flex flex-col gap-y-6"
+      >
         <span className="flex gap-y-2 flex-col">
           <label htmlFor="email">Email</label>
           <input
