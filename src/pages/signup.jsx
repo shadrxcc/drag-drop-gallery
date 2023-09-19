@@ -1,12 +1,15 @@
 import { useState } from "react";
 import { supabase } from "../../client";
 import { Alert, AlertIcon, AlertDescription } from "@chakra-ui/react";
+import { Link, useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
+
+  const navigate = useNavigate()
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -24,6 +27,9 @@ const Signup = () => {
         setSuccess(
           "Account created uccessfully! Check your mail for a verification link"
         );
+        setInterval(() => {
+          navigate(`/login`)
+        }, 3000)
       }
     } catch (error) {
       console.error("Error signing up:", error.message);
@@ -89,7 +95,12 @@ const Signup = () => {
         </button>
       </form>
 
-      <p>Already have an account? <span className="border-b">Log in</span> </p>
+      <p>
+        Already have an account?{" "}
+        <Link to={`/login`}>
+          <span className="border-b">Log in</span>
+        </Link>{" "}
+      </p>
     </div>
   );
 };
