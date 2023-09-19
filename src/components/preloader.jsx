@@ -1,15 +1,20 @@
 import { useState } from "react";
 import { supabase } from "../../client";
 import { Alert, AlertIcon, AlertDescription } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
 const Preloader = () => {
   const [error, setError] = useState("");
+  const navigate = useNavigate();
+
   const signOut = async (e) => {
     e.preventDefault();
     try {
       const { error } = await supabase.auth.signOut();
       if (error) {
         setError(error.message);
+      } else {
+        navigate(`/`);
       }
     } catch (error) {
       setError(error.message);
