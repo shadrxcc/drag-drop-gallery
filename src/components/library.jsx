@@ -87,10 +87,12 @@ const Library = () => {
                 onDragEnter={() => (dragOverItem.current = index)}
                 onDragEnd={handleSort}
                 src={image.img}
+                onTouchStart={(e) => e.preventDefault()}
+                onTouchMove={(e) => e.preventDefault()}
                 className=" rounded-2xl w-full bg-cover bg-center bg-no-repeat h-[20em] m-auto"
                 // style={{ backgroundImage: `url(${image.img})` }}
                 alt=""
-                />
+              />
               // ></div>
             );
           })}
