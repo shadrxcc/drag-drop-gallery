@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { images } from "./imagedata";
 import { MdMenu, MdClose } from "react-icons/md";
 import { BiLoader } from "react-icons/bi";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useAuth } from "../context/authcontext";
 import { Alert, AlertDescription, AlertIcon } from "@chakra-ui/react";
 import { supabase } from "../../client";
