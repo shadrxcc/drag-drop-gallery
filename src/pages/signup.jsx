@@ -25,7 +25,7 @@ const Signup = () => {
       } else {
         console.log(data);
         setSuccess(
-          "Account created uccessfully! Check your mail for a verification link"
+          "Account created uccessfully!"
         );
         setInterval(() => {
           navigate(`/login`)

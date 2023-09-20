@@ -26,14 +26,14 @@ const Login = () => {
       } else {
         console.log(data);
         setLoginSuccess(
-          "Account created uccessfully! Check your mail for a verification link"
+          "Sign in successful! Hold on a sec"
         );
         setInterval(() => {
-          navigate(`/loader`);
+          navigate(`/`);
         }, 2000);
       }
     } catch (error) {
-      console.error("Error signing up:", error.message);
+      console.error("Error signing in:", error.message);
     }
   };
 
