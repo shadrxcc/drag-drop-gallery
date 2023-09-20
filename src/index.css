@@ -34,3 +34,13 @@ html body {
   font-family: quatrocento;
   color: white;
 }
+
+.drag {
+  cursor: grab;
+}
+
+.griditemUI {
+  background-color: #949c9c;
+  border: 2px solid #fff;
+  line-height: 100px;
+}
