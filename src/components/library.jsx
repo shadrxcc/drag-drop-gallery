@@ -46,15 +46,16 @@ const Library = () => {
 
   return (
     <div id="library" className="px-2 sm:px-5">
-      <form
+      <div className="flex justify-evenly items-center w-full">
+        <form
         action="search"
         onClick={handleSearch}
-        className="flex justify-center py-8 gap-x-1.5 items-center"
+        className="flex flex-[0.8_1_0] justify-center py-8 gap-x-1.5 items-center"
       >
         <input
           type="text"
           value={tag}
-          className="w-3/4 p-3 bg-transparent border rounded-lg"
+          className="w-full p-3 bg-transparent border rounded-lg"
           name="text"
           id="text"
           placeholder=""
@@ -63,7 +64,11 @@ const Library = () => {
         <button className="bg-white py-3 px-3 text-black rounded-lg">
           Search
         </button>
-      </form>
+      </form> 
+
+      <p className="">Sign in</p>
+      </div>
+     
 
       {notfound ? (
         <div className="flex">
