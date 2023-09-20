@@ -72,7 +72,7 @@ const Library = () => {
           </p>
         </div>
       ) : (
-        <div className="grid drag py-10 grid-cols-2 sm:grid-cols-3 gap-y-3 gap-x-2 lg:grid-cols-4 xl:grid-cols-5">
+        <div className="grid drag py-10 grid-cols-2 sm:grid-cols-3 gap-y-5 gap-x-2 sm:gap-x-5 lg:grid-cols-4 xl:grid-cols-5">
           {galleryImages.map((image, index) => {
             return (
               <div
@@ -87,7 +87,12 @@ const Library = () => {
                 alt=""
               >
                 {" "}
-                
+                <img
+                  src={image.img}
+                  alt=""
+                  loading="lazy"
+                  style={{ display: "none" }}
+                />
               </div>
             );
           })}
