@@ -79,19 +79,19 @@ const Library = () => {
         <div className="grid drag py-10 grid-cols-2 sm:grid-cols-3 gap-y-5 gap-x-2 sm:gap-x-5 lg:grid-cols-4 xl:grid-cols-5">
           {galleryImages.map((image, index) => {
             return (
-              <div
+              <img
                 key={image.id}
                 draggable
                 onDragOver={(e) => e.preventDefault()}
                 onDragStart={() => (dragItem.current = index)}
                 onDragEnter={() => (dragOverItem.current = index)}
-                onTouchStart={() => (dragItem.current = index)}
-                onTouchMove={() => (dragOverItem.current = index)}
                 onDragEnd={handleSort}
+                src={image.img}
                 className=" rounded-2xl w-full bg-cover bg-center bg-no-repeat h-[20em] m-auto"
-                style={{ backgroundImage: `url(${image.img})` }}
+                // style={{ backgroundImage: `url(${image.img})` }}
                 alt=""
-              ></div>
+                />
+              // ></div>
             );
           })}
         </div>
