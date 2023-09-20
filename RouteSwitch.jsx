@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import Signup from "./src/pages/signup";
 import Login from "./src/pages/login";
-import Preloader from "./src/components/preloader";
+
 import AuthProvider from "./src/context/authcontext";
 import AuthRoute from "./authroute";
 import Library from "./src/components/library";
@@ -18,7 +18,7 @@ const RouteSwitch = () => {
           <Route path="/library" element={<Library/>}/>
 
           <Route element={<AuthRoute />}>
-            <Route path="/loader" element={<Preloader />} />
+           
           </Route>
           {/* {user ? (
           <Route path="/loader" element={<Preloader />} />
