@@ -28,7 +28,7 @@ const Signup = () => {
           "Account created uccessfully!"
         );
         setInterval(() => {
-          navigate(`/login`)
+          navigate(`/`)
         }, 3000)
       }
     } catch (error) {

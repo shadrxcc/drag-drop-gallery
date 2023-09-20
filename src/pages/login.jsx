@@ -97,7 +97,7 @@ const Login = () => {
       </form>
       <p>
         Don&apos;t have an account?{" "}
-        <Link to={`/`}>
+        <Link to={`/signup`}>
           <span className="border-b">Sign up</span>
         </Link>
       </p>

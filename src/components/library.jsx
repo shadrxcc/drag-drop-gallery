@@ -28,6 +28,9 @@ const Library = () => {
       const { error } = await supabase.auth.signOut();
       if (error) {
         setError(error.message);
+      } else {
+        setMenuToggle(false);
+        window.location.reload(); //temporal fix to stop login page from flickering after signout :)
       }
     } catch (error) {
       console.error(error);
@@ -35,6 +38,7 @@ const Library = () => {
       setLoading(false);
     } finally {
       setLoading(false);
+      e.preventDefault();
     }
   };
 
@@ -145,10 +149,30 @@ const Library = () => {
               size={30}
             />
           </div>
-          <Link to={`/login`}>
-            {" "}
-            <p className="text-center font-bold text-xl">Sign in</p>
-          </Link>
+          {user ? (
+            <button className="py-2 text-xl border" onClick={handleLogout}>
+              Sign out
+            </button>
+          ) : (
+            <Link onClick={() => setMenuToggle(false)} to={`/login`}>
+              {" "}
+              <p className="text-center border py-2 text-xl">Sign in</p>
+            </Link>
+          )}
+        </div>
+      )}
+
+      {user ? (
+        <div className="flex px-1.5">
+          <p className="items-center text-center text-xl sm:text-3xl mx-auto">
+            Drag and drop images wherever you want :)
+          </p>
+        </div>
+      ) : (
+        <div className="flex px-1.5">
+          <p className="items-center text-center text-xl sm:text-3xl mx-auto">
+            You must be signed in to use the drag and drop feature :)
+          </p>
         </div>
       )}
       {notfound ? (
@@ -162,6 +186,7 @@ const Library = () => {
           {galleryImages.map((image, index) => {
             return (
               <img
+                loading="lazy"
                 key={image.id}
                 draggable={user ? true : false}
                 onDragOver={(e) => e.preventDefault()}
