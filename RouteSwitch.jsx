@@ -5,6 +5,7 @@ import Login from "./src/pages/login";
 import AuthProvider from "./src/context/authcontext";
 // import AuthRoute from "./authroute";
 import Library from "./src/components/library";
+import { SkeletonTheme } from "react-loading-skeleton";
 // import { useAuth } from "./src/context/useAuth";
 
 const RouteSwitch = () => {
@@ -12,13 +13,14 @@ const RouteSwitch = () => {
   return (
     <>
       <AuthProvider>
-        <Routes>
-          <Route path="/" element={<Library />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
+        <SkeletonTheme baseColor="#202020" highlightColor="#444">
+          <Routes>
+            <Route path="/" element={<Library />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
 
-          {/* <Route element={<AuthRoute />}></Route> */}
-          {/* {user ? (
+            {/* <Route element={<AuthRoute />}></Route> */}
+            {/* {user ? (
           <Route path="/loader" element={<Preloader />} />
         ) : (
           <Route
@@ -26,7 +28,8 @@ const RouteSwitch = () => {
             element={<Navigate to="/login" replace />}
           />
         )} */}
-        </Routes>
+          </Routes>
+        </SkeletonTheme>
       </AuthProvider>
     </>
   );

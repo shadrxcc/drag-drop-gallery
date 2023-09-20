@@ -14,16 +14,14 @@ const Signup = () => {
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
-      const { data, error } = await supabase.auth.signUp({
+      const { error } = await supabase.auth.signUp({
         email: email,
         password: password,
       });
 
       if (error) {
-        console.error("Error signing up:" + error.message);
         setError(error.message);
       } else {
-        console.log(data);
         setSuccess(
           "Account created uccessfully!"
         );
@@ -32,7 +30,7 @@ const Signup = () => {
         }, 3000)
       }
     } catch (error) {
-      console.error("Error signing up:", error.message);
+      setError("Error signing up:", error.message);
     }
   };
 
@@ -42,13 +40,13 @@ const Signup = () => {
       className="flex flex-col gap-y-6 justify-center px-4 md:px-20 lg:px-40"
     >
       {error && (
-        <Alert status="error">
+        <Alert className="rounded-lg text-black" status="error">
           <AlertIcon />
           <AlertDescription>{error}</AlertDescription>
         </Alert>
       )}
       {success && (
-        <Alert status="success">
+        <Alert className="rounded-lg text-black" status="success">
           <AlertIcon />
           {success}
         </Alert>

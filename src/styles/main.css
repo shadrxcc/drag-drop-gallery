@@ -31,46 +31,82 @@
 }
 
 #login {
-    background: linear-gradient(
-        0deg,
-        rgba(0, 0, 0, 0.8) 0%,
-        rgba(0, 0, 0, 0.8) 100%
-      ),
-      url("/src/assets/gwen.webp"), lightgray;
-    width: 100%;
-    height: 100vh;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    font-family: otto;
-    overflow: hidden;
+  background: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.8) 0%,
+      rgba(0, 0, 0, 0.8) 100%
+    ),
+    url("/src/assets/gwen.webp"), lightgray;
+  width: 100%;
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: otto;
+  overflow: hidden;
+}
+
+#library {
+  background: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.9) 0%,
+      rgba(0, 0, 0, 0.9) 100%
+    ),
+    url("/src/assets/national.webp"), lightgray;
+  width: 100%;
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: otto;
+  overflow-y: auto;
+}
+
+#loader {
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
   }
-  
-  #library {
-    background: linear-gradient(
-        0deg,
-        rgba(0, 0, 0, 0.9) 0%,
-        rgba(0, 0, 0, .9) 100%
-      ),
-      url("/src/assets/national.webp"), lightgray;
-    width: 100%;
-    height: 100vh;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    font-family: otto;
-    overflow-y: auto;
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+#navbar {
+  transition: 0.7s ease-in-out;
+}
+
+#navbar.active {
+  top: 0;
+  transition: 0.7s ease-in-out;
+}
+
+.skeleton {
+  position: relative;
+}
+
+.skeleton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  background: linear-gradient(90deg, #eee, #f9f9f9, #eee);
+  background-size: cover;
+  animation: skeleton 1s infinite reverse;
+}
+
+@keyframes skeleton {
+  0% {
+    background-position: -100% 0;
   }
 
-  #outerloader {
-    animation: spin 10s linear infinite;
+  100% {
+    background-position: 100% 0;
   }
-  
-  @keyframes spin {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
+}

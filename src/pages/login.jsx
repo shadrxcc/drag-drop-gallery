@@ -2,11 +2,13 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "../../client";
 import { Alert, AlertIcon, AlertDescription } from "@chakra-ui/react";
+import { BiLoader } from "react-icons/bi";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const [loginsuccess, setLoginSuccess] = useState("");
 
   const navigate = useNavigate();
@@ -15,25 +17,27 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const { data, error } = await supabase.auth.signInWithPassword({
+      setLoading(true);
+      const { error } = await supabase.auth.signInWithPassword({
         email: email,
         password: password,
       });
 
       if (error) {
-        console.error("Error signing up:" + error.message);
-        setError(error.message);
+        setError("Error signing in. Please try again");
+        setLoading(false);
+        setInterval(() => {
+          setError("");
+        }, 2000);
       } else {
-        console.log(data);
-        setLoginSuccess(
-          "Sign in successful! Hold on a sec"
-        );
+        setLoginSuccess("Sign in successful! Hold on a sec ;)");
+        setLoading(false);
         setInterval(() => {
           navigate(`/`);
         }, 2000);
       }
     } catch (error) {
-      console.error("Error signing in:", error.message);
+      setError('Error signing in' + error.message);
     }
   };
 
@@ -92,7 +96,11 @@ const Login = () => {
         </span>
 
         <button className="bg-white text-black py-2 w-full rounded-lg">
-          Sign In
+          {loading ? (
+            <BiLoader size={25} id="loader" className="m-auto" />
+          ) : (
+            "Sign In"
+          )}
         </button>
       </form>
       <p>

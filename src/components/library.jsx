@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../context/authcontext";
 import { Alert, AlertDescription, AlertIcon } from "@chakra-ui/react";
 import { supabase } from "../../client";
+import Skeleton from "react-loading-skeleton";
+import Imageskeleton from "./imageskeleton";
 
 const Library = () => {
   const [galleryImages, setGalleryImages] = useState(images);
@@ -16,6 +18,7 @@ const Library = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [notfound, setNotFound] = useState(false);
+  const [filter, setFilter] = useState('')
 
   const { user } = useAuth();
 
@@ -37,6 +40,7 @@ const Library = () => {
       setError("An error occurred during sign-out.");
       setLoading(false);
     } finally {
+      setError("");
       setLoading(false);
       e.preventDefault();
     }
@@ -120,7 +124,7 @@ const Library = () => {
               className="hidden p-3 border rounded-lg sm:block"
             >
               {loading ? (
-                <BiLoader className="loader" color="white" size={20} />
+                <BiLoader id="loader" className="m-auto" color="white" size={20} />
               ) : (
                 "Sign Out"
               )}
@@ -137,8 +141,9 @@ const Library = () => {
 
       {menutoggle && (
         <div
-          className={`absolute p-4 w-full flex sm:hidden top-0 flex-col gap-y-10 bg-black text-white h-2/4 transition-transform ${
-            menutoggle ? "translate-y-0" : "-translate-y-22em"
+          id="navbar"
+          className={`absolute p-6 rounded-b-lg w-full flex sm:hidden left-0 top-[-22em] flex-col gap-y-10 bg-black text-white h-2/4 transition-transform ${
+            menutoggle ? "#navbar active" : "#navbar"
           }`}
         >
           <div>
@@ -150,13 +155,22 @@ const Library = () => {
             />
           </div>
           {user ? (
-            <button className="py-2 text-xl border" onClick={handleLogout}>
-              Sign out
+            <button
+              className="py-2 text-xl rounded-lg border"
+              onClick={handleLogout}
+            >
+              {loading ? (
+                <BiLoader id="loader" className="m-auto" color="white" size={20} />
+              ) : (
+                "Sign Out"
+              )}
             </button>
           ) : (
             <Link onClick={() => setMenuToggle(false)} to={`/login`}>
               {" "}
-              <p className="text-center border py-2 text-xl">Sign in</p>
+              <p className="text-center rounded-lg border py-2 text-xl">
+                Sign in
+              </p>
             </Link>
           )}
         </div>
@@ -175,9 +189,11 @@ const Library = () => {
           </p>
         </div>
       )}
+
+      <Imageskeleton images={5} />
       {notfound ? (
-        <div className="flex px-1.5">
-          <p className="items-center text-center text-xl sm:text-3xl mx-auto">
+        <div className="flex py-20 px-1.5">
+          <p className="items-center border-b pb-1.5 text-center text-xl sm:text-3xl mx-auto">
             No items match your search. Try again
           </p>
         </div>
@@ -194,7 +210,7 @@ const Library = () => {
                 onDragEnter={() => (dragOverItem.current = index)}
                 onDragEnd={handleSort}
                 src={image.img}
-                className=" rounded-2xl w-full bg-cover bg-center bg-no-repeat h-[20em] m-auto"
+                className="skeleton rounded-2xl w-full bg-cover bg-center bg-no-repeat h-[20em] m-auto"
                 alt=""
               />
             );
