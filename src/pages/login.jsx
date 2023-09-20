@@ -43,13 +43,13 @@ const Login = () => {
       className="flex flex-col gap-y-6 justify-center px-4 md:px-20 lg:px-40"
     >
       {error && (
-        <Alert className="rounded-lg" status="error">
+        <Alert className="rounded-lg text-black" status="error">
           <AlertIcon />
           <AlertDescription>{error}</AlertDescription>
         </Alert>
       )}
       {loginsuccess && (
-        <Alert className="rounded-lg" status="success">
+        <Alert className="rounded-lg text-black" status="success">
           <AlertIcon />
           {loginsuccess}
         </Alert>
