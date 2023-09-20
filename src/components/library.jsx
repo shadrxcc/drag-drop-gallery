@@ -87,17 +87,11 @@ const Library = () => {
                 onDragStart={() => (dragItem.current = index)}
                 onDragEnter={() => (dragOverItem.current = index)}
                 onDragEnd={handleSort}
-                className=" rounded-2xl w-full bg-cover bg-center bg-no-repeat h-[20em] bg-red-600 m-auto"
+                className=" rounded-2xl w-full bg-cover bg-center bg-no-repeat h-[20em] m-auto"
                 style={{ backgroundImage: `url(${image.img})` }}
                 alt=""
               >
-                {" "}
-                <img
-                  src={image.img}
-                  alt=""
-                  loading="lazy"
-                  style={{ display: "none" }}
-                />
+              
               </div>
             );
           })}
