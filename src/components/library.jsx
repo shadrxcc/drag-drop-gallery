@@ -45,7 +45,7 @@ const Library = () => {
   };
 
   return (
-    <div id="library" className="px-2">
+    <div id="library" className="px-2 sm:px-5">
       <form
         action="search"
         onClick={handleSearch}
@@ -72,20 +72,23 @@ const Library = () => {
           </p>
         </div>
       ) : (
-        <div className="grid drag grid-cols-2 sm:grid-cols-3 gap-y-3 gap-x-2 lg:grid-cols-4 xl:grid-cols-5">
+        <div className="grid drag py-10 grid-cols-2 sm:grid-cols-3 gap-y-3 gap-x-2 lg:grid-cols-4 xl:grid-cols-5">
           {galleryImages.map((image, index) => {
             return (
-              <img
+              <div
                 key={image.id}
                 draggable
                 onDragOver={(e) => e.preventDefault()}
                 onDragStart={() => (dragItem.current = index)}
                 onDragEnter={() => (dragOverItem.current = index)}
                 onDragEnd={handleSort}
-                className="w-[10em] rounded-2xl md:w-[15em] m-auto"
-                src={image.img}
+                className=" rounded-2xl w-full bg-cover bg-center bg-no-repeat h-[20em] bg-red-600 m-auto"
+                style={{ backgroundImage: `url(${image.img})` }}
                 alt=""
-              />
+              >
+                {" "}
+                
+              </div>
             );
           })}
         </div>
