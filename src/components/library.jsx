@@ -48,31 +48,30 @@ const Library = () => {
     <div id="library" className="px-2 sm:px-5">
       <div className="flex justify-evenly items-center w-full">
         <form
-        action="search"
-        onClick={handleSearch}
-        className="flex flex-[0.8_1_0] justify-center py-8 gap-x-1.5 items-center"
-      >
-        <input
-          type="text"
-          value={tag}
-          className="w-full p-3 bg-transparent border rounded-lg"
-          name="text"
-          id="text"
-          placeholder=""
-          onChange={(e) => setTag(e.target.value)}
-        />
-        <button className="bg-white py-3 px-3 text-black rounded-lg">
-          Search
-        </button>
-      </form> 
+          action="search"
+          onClick={handleSearch}
+          className="flex flex-[0.8_1_0] justify-center py-8 gap-x-1.5 items-center"
+        >
+          <input
+            type="text"
+            value={tag}
+            className="w-full p-3 bg-transparent border rounded-lg"
+            name="text"
+            id="text"
+            placeholder=""
+            onChange={(e) => setTag(e.target.value)}
+          />
+          <button className="bg-white py-3 px-3 text-black rounded-lg">
+            Search
+          </button>
+        </form>
 
-      <p className="">Sign in</p>
+        <p className="">Sign in</p>
       </div>
-     
 
       {notfound ? (
-        <div className="flex">
-          <p className="items-center text-3xl mx-auto">
+        <div className="flex px-1.5">
+          <p className="items-center text-center text-xl sm:text-3xl mx-auto">
             No items match your search. Try again
           </p>
         </div>
@@ -90,9 +89,7 @@ const Library = () => {
                 className=" rounded-2xl w-full bg-cover bg-center bg-no-repeat h-[20em] m-auto"
                 style={{ backgroundImage: `url(${image.img})` }}
                 alt=""
-              >
-              
-              </div>
+              ></div>
             );
           })}
         </div>
