@@ -20,17 +20,21 @@ const Signup = () => {
       });
 
       if (error) {
-        setError(error.message);
+        setError("Error signing up. Please try again or check your network!");
       } else {
         setSuccess(
           "Account created uccessfully!"
         );
         setInterval(() => {
-          navigate(`/`)
+          navigate(`/login`)
         }, 3000)
       }
     } catch (error) {
-      setError("Error signing up:", error.message);
+      setError("Error signing up. Please try again or check your network!");
+    } finally {
+      setInterval(() => {
+        setError("");
+      }, 2000);
     }
   };
 
@@ -60,7 +64,7 @@ const Signup = () => {
         <span className="flex gap-y-2 flex-col">
           <label htmlFor="email">Email</label>
           <input
-            className="bg-transparent px-2 outline-none rounded-lg py-2 border"
+            className={`${error ? 'border-red-600' : ''} bg-transparent px-2 outline-none py-2 rounded-lg border`}
             type="email"
             name="email"
             value={email}
@@ -76,7 +80,7 @@ const Signup = () => {
         <span className="flex gap-y-2 flex-col">
           <label htmlFor="password">Password</label>
           <input
-            className="bg-transparent px-2 outline-none py-2 rounded-lg border"
+            className={`${error ? 'border-red-600' : ''} bg-transparent px-2 outline-none py-2 rounded-lg border`}
             type="password"
             name="password"
             value={password}

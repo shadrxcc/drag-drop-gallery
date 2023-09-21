@@ -282,7 +282,6 @@ const Library = () => {
                   ref={imageRef}
                   style={{ display: !imgloaded ? "none" : "inline" }}
                   draggable={user ? true : false}
-                  loading="lazy"
                   src={image.img}
                   className="skeleton rounded-2xl w-full bg-cover bg-center bg-no-repeat h-[20em] m-auto"
                   alt={image.tags}
