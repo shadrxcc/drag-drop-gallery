@@ -244,6 +244,7 @@ const Library = () => {
             {galleryImages.map((image, index) => {
               return (
                 <div
+                style={{backgroundImage: `url(${image.img})`}}
                   draggable={user ? true : false}
                   onDragOver={(e) => e.preventDefault()}
                   onDragStart={(e) => {
@@ -258,15 +259,15 @@ const Library = () => {
                     dragOverItem.current = index;
                   }}
                   onDragEnd={handleSort}
-                  key={image.id}
+                  key={image.id} className=" rounded-2xl w-full bg-cover h-[20em] bg-center bg-no-repeat"
                 >
-                  <img
+                  {/* <img
                     loading="lazy"
                     key={image.id}
                     src={image.img}
                     className="skeleton rounded-2xl w-full bg-cover bg-center bg-no-repeat h-[20em] m-auto"
                     alt=""
-                  />
+                  /> */}
                 </div>
               );
             })}
