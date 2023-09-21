@@ -8,6 +8,7 @@ import { Alert, AlertDescription, AlertIcon } from "@chakra-ui/react";
 import { supabase } from "../../client";
 import { gsap } from "gsap";
 import Animatedintro from "./animatedintro";
+import Sortable from "sortablejs";
 
 const Library = () => {
   const [galleryImages, setGalleryImages] = useState(images);
@@ -47,27 +48,42 @@ const Library = () => {
     }
   };
 
-  const handleSort = () => {
-    if (dragItem.current === null || dragOverItem.current === null) {
-      return;
-    }
+  useEffect(() => {
+    const sortableContainer = document.querySelector(".grid");
+    const sortable = new Sortable(sortableContainer, {
+      animation: 500,
+      swapThreshold: 10,
+      onEnd: (e) => {
+        const { oldIndex, newIndex } = e;
+        const galleryCopy = [...galleryImages];
+        const [draggedItem] = galleryCopy.splice(oldIndex, 1);
+        galleryCopy.splice(newIndex, 0, draggedItem);
+        setGalleryImages(galleryCopy);
+      },
+    });
+  }, [galleryImages]);
 
-    const draggedIndex = dragItem.current;
-    const dragOverIndex = dragOverItem.current;
+  // const handleSort = () => {
+  //   if (dragItem.current === null || dragOverItem.current === null) {
+  //     return;
+  //   }
 
-    if (draggedIndex === dragOverIndex) {
-      return;
-    }
+  //   const draggedIndex = dragItem.current;
+  //   const dragOverIndex = dragOverItem.current;
 
-    const galleryCopy = [...galleryImages];
-    const [draggedItem] = galleryCopy.splice(draggedIndex, 1);
-    galleryCopy.splice(dragOverIndex, 0, draggedItem);
+  //   if (draggedIndex === dragOverIndex) {
+  //     return;
+  //   }
 
-    setGalleryImages(galleryCopy);
+  //   const galleryCopy = [...galleryImages];
+  //   const [draggedItem] = galleryCopy.splice(draggedIndex, 1);
+  //   galleryCopy.splice(dragOverIndex, 0, draggedItem);
 
-    dragItem.current = null;
-    dragOverItem.current = null;
-  };
+  //   setGalleryImages(galleryCopy);
+
+  //   dragItem.current = null;
+  //   dragOverItem.current = null;
+  // };
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -243,32 +259,27 @@ const Library = () => {
           <div className="grid drag py-10 grid-cols-2 sm:grid-cols-3 gap-y-5 gap-x-2 sm:gap-x-5 lg:grid-cols-4 xl:grid-cols-5">
             {galleryImages.map((image, index) => {
               return (
-                <div
-                style={{backgroundImage: `url(${image.img})`}}
+                <img
+                  loading="lazy"
+                  key={image.id}
                   draggable={user ? true : false}
                   onDragOver={(e) => e.preventDefault()}
-                  onDragStart={(e) => {
-                    e.stopPropagation();
-                    dragItem.current = index;
-                  }}
-                  onTouchStart={() => (dragItem.current = index)}
-                  onTouchMove={() => (dragOverItem.current = index)}
-                  onTouchEnd={handleSort}
-                  onDragEnter={(e) => {
-                    e.stopPropagation();
-                    dragOverItem.current = index;
-                  }}
-                  onDragEnd={handleSort}
-                  key={image.id} className=" rounded-2xl w-full bg-cover h-[20em] bg-center bg-no-repeat"
-                >
-                  {/* <img
-                    loading="lazy"
-                    key={image.id}
-                    src={image.img}
-                    className="skeleton rounded-2xl w-full bg-cover bg-center bg-no-repeat h-[20em] m-auto"
-                    alt=""
-                  /> */}
-                </div>
+                  // onDragStart={(e) => {
+                  //   e.stopPropagation();
+                  //   dragItem.current = index;
+                  // }}
+                  // onTouchStart={() => (dragItem.current = index)}
+                  // onTouchMove={() => (dragOverItem.current = index)}
+                  // onTouchEnd={handleSort}
+                  // onDragEnter={(e) => {
+                  //   e.stopPropagation();
+                  //   dragOverItem.current = index;
+                  // }}
+                  // onDragEnd={handleSort}
+                  src={image.img}
+                  className="skeleton rounded-2xl w-full bg-cover bg-center bg-no-repeat h-[20em] m-auto"
+                  alt=""
+                />
               );
             })}
           </div>
