@@ -117,7 +117,7 @@ const Library = () => {
 
   return (
     <>
-      <div id="library" className="px-2 sm:px-5">
+      <div id="library" className="px-3 sm:px-5">
         {error && (
           <Alert className="rounded-lg text-black" status="error">
             <AlertIcon />
@@ -125,8 +125,8 @@ const Library = () => {
           </Alert>
         )}
 
-        <div className="relative">
-          <div className="flex justify-evenly items-center w-full">
+        <div className="relative mb-32">
+          <div className="flex justify-evenly fixed z-10 bg-transparent items-center w-full">
             <form
               action="search"
               onClick={handleSearch}
@@ -135,10 +135,10 @@ const Library = () => {
               <input
                 type="text"
                 value={tag}
-                className="w-full p-3 bg-transparent border rounded-lg"
+                className="w-full placeholder:text-white p-3 bg-transparent border rounded-lg"
                 name="text"
                 id="text"
-                placeholder=""
+                placeholder="Search and filter by tags"
                 onChange={(e) => setTag(e.target.value)}
               />
               <button className="bg-white py-3 px-3 text-black rounded-lg">
