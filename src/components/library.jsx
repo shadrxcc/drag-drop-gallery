@@ -249,11 +249,11 @@ const Library = () => {
                   draggable={user ? true : false}
                   onDragOver={(e) => e.preventDefault()}
                   onDragStart={(e) => {
-                    e.preventDefault();
+                    e.stopPropagation();
                     dragItem.current = index;
                   }}
                   onDragEnter={(e) => {
-                    e.preventDefault();
+                    e.stopPropagation();
                     dragOverItem.current = index;
                   }}
                   onDragEnd={handleSort}
