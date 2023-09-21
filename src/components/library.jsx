@@ -110,7 +110,6 @@ const Library = () => {
         scaleX: 1,
         duration: 1.5,
         delay: 2,
-        
       }
     );
   }, []);
@@ -249,8 +248,14 @@ const Library = () => {
                   key={image.id}
                   draggable={user ? true : false}
                   onDragOver={(e) => e.preventDefault()}
-                  onDragStart={() => (dragItem.current = index)}
-                  onDragEnter={() => (dragOverItem.current = index)}
+                  onDragStart={(e) => {
+                    e.preventDefault();
+                    dragItem.current = index;
+                  }}
+                  onDragEnter={(e) => {
+                    e.preventDefault();
+                    dragOverItem.current = index;
+                  }}
                   onDragEnd={handleSort}
                   src={image.img}
                   className="skeleton rounded-2xl w-full bg-cover bg-center bg-no-repeat h-[20em] m-auto"
