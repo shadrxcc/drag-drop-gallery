@@ -9,6 +9,7 @@ import { gsap } from "gsap";
 import Animatedintro from "./animatedintro";
 import Sortable from "sortablejs";
 import { useAuth } from "../context/useAuth";
+import { Blurhash } from "react-blurhash";
 
 const Library = () => {
   const [galleryImages, setGalleryImages] = useState(images);
@@ -17,13 +18,25 @@ const Library = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [notfound, setNotFound] = useState(false);
+  const [imgloaded, setImgLoaded] = useState(false);
 
   const splitRef = useRef(null);
   const preloaderRef = useRef(null);
   const gridRef = useRef(null);
   const sortableJsRef = useRef(null);
+  const imageRef = useRef(null);
 
   const { user } = useAuth();
+
+  useEffect(() => {
+    galleryImages.forEach((image) => {
+      const img = new Image();
+      img.onload = () => {
+        setImgLoaded(true);
+      };
+      img.src = image.img;
+    });
+  }, [galleryImages]);
 
   const handleLogout = async (e) => {
     e.preventDefault();
@@ -254,13 +267,27 @@ const Library = () => {
                 key={image.id}
                 className="flex lg:hover:scale-[1.05] transition-all ease-in-out duration-300 gap-y-2 flex-col"
               >
+                <div style={{ display: imgloaded ? "none" : "inline" }}>
+                  <Blurhash
+                    hash="LOI59}0JV[xa~qjEIoxuEgMd%MkW"
+                    width="100%"
+                    height="20em"
+                    resolutionX={32}
+                    resolutionY={32}
+                    punch={1}
+                  />
+                </div>
+
                 <img
+                  ref={imageRef}
+                  style={{ display: !imgloaded ? "none" : "inline" }}
                   draggable={user ? true : false}
                   loading="lazy"
                   src={image.img}
-                  className="skeleton rounded-2xl w-full bg-cover bg-red-700 bg-center bg-no-repeat h-[20em] m-auto"
+                  className="skeleton rounded-2xl w-full bg-cover bg-center bg-no-repeat h-[20em] m-auto"
                   alt={image.tags}
                 />
+
                 <p className="text-red-700">
                   TAGS: <span className="text-white">{image.tags}</span>
                 </p>
