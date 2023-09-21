@@ -12,6 +12,7 @@ const AuthProvider = ({ children }) => {
     const listen = onAuthStateChanged(auth, (user) => {
       if (user) {
         setAuthUser(user)
+        sessionStorage.setItem('authStatus', user)
       } else {
         setAuthUser(null)
       }

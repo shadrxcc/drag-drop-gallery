@@ -32,6 +32,7 @@ const Library = () => {
       .then(() => {
         setLoading(true);
         console.log("successful");
+        sessionStorage.removeItem('authStatus')
         setMenuToggle(false);
       })
       .catch((error) => {
