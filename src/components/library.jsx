@@ -243,9 +243,7 @@ const Library = () => {
           <div className="grid drag py-10 grid-cols-2 sm:grid-cols-3 gap-y-5 gap-x-2 sm:gap-x-5 lg:grid-cols-4 xl:grid-cols-5">
             {galleryImages.map((image, index) => {
               return (
-                <img
-                  loading="lazy"
-                  key={image.id}
+                <div
                   draggable={user ? true : false}
                   onDragOver={(e) => e.preventDefault()}
                   onDragStart={(e) => {
@@ -260,10 +258,16 @@ const Library = () => {
                     dragOverItem.current = index;
                   }}
                   onDragEnd={handleSort}
-                  src={image.img}
-                  className="skeleton rounded-2xl w-full bg-cover bg-center bg-no-repeat h-[20em] m-auto"
-                  alt=""
-                />
+                  key={image.id}
+                >
+                  <img
+                    loading="lazy"
+                    key={image.id}
+                    src={image.img}
+                    className="skeleton rounded-2xl w-full bg-cover bg-center bg-no-repeat h-[20em] m-auto"
+                    alt=""
+                  />
+                </div>
               );
             })}
           </div>
