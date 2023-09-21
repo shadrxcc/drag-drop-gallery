@@ -3,12 +3,13 @@ import { images } from "./imagedata";
 import { MdMenu, MdClose } from "react-icons/md";
 import { BiLoader } from "react-icons/bi";
 import { Link } from "react-router-dom";
-import { useAuth } from "../context/authcontext";
+// import { useAuth } from "../context/authcontext";
 import { Alert, AlertDescription, AlertIcon } from "@chakra-ui/react";
 import { supabase } from "../../client";
 import { gsap } from "gsap";
 import Animatedintro from "./animatedintro";
 import Sortable from "sortablejs";
+import { useAuth } from "../context/useAuth";
 
 const Library = () => {
   const [galleryImages, setGalleryImages] = useState(images);
@@ -17,6 +18,7 @@ const Library = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [notfound, setNotFound] = useState(false);
+
   const splitRef = useRef(null);
   const preloaderRef = useRef(null);
   const gridRef = useRef(null);
@@ -35,6 +37,7 @@ const Library = () => {
         setError(error.message);
       } else {
         setMenuToggle(false);
+        sessionStorage.removeItem("user_data");
         window.location.reload(); // Temporal fix to stop the login page from flickering after signout :)
       }
     } catch (error) {
@@ -117,7 +120,7 @@ const Library = () => {
 
   return (
     <>
-      <div id="library" className="px-3 sm:px-5">
+      <div id="library" className="px-3 relative sm:px-5">
         {error && (
           <Alert className="rounded-lg text-black" status="error">
             <AlertIcon />
@@ -125,8 +128,10 @@ const Library = () => {
           </Alert>
         )}
 
-        <div className="relative mb-32">
-          <div className="flex justify-evenly fixed z-10 bg-transparent items-center w-full">
+        <div className="relative mb-48">
+          <div
+            className={`flex justify-evenly w-full overflow-hidden fixed left-0 z-10 bg-black sm:bg-transparent items-center`}
+          >
             <form
               action="search"
               onClick={handleSearch}
@@ -141,7 +146,7 @@ const Library = () => {
                 placeholder="Search and filter by tags"
                 onChange={(e) => setTag(e.target.value)}
               />
-              <button className="bg-white py-3 px-3 text-black rounded-lg">
+              <button className="bg-white hover:scale-[1.1] transition-all ease-in-out duration-300 py-3 px-3 text-black rounded-lg">
                 Search
               </button>
             </form>
@@ -170,7 +175,7 @@ const Library = () => {
               </button>
             ) : (
               <Link to={`/login`}>
-                <button className="hidden border p-3 rounded-lg sm:block">
+                <button className="hidden hover:scale-[1.1] transition-all ease-in-out duration-300 border p-3 rounded-lg sm:block">
                   Sign In
                 </button>
               </Link>
@@ -181,7 +186,7 @@ const Library = () => {
         {menutoggle && (
           <div
             id="navbar"
-            className={`absolute p-6 rounded-b-lg w-full flex sm:hidden left-0 top-[-22em] flex-col gap-y-10 bg-black text-white h-2/4 transition-transform ${
+            className={`absolute rounded-b-[2em] p-6 w-full flex sm:hidden left-0 top-[-22em] flex-col gap-y-10 bg-black text-white h-2/4 transition-transform ${
               menutoggle ? "#navbar active" : "#navbar"
             }`}
           >
@@ -245,18 +250,20 @@ const Library = () => {
             ref={gridRef}
             className="grid drag py-10 grid-cols-2 sm:grid-cols-3 gap-y-5 gap-x-2 sm:gap-x-5 lg:grid-cols-4 xl:grid-cols-5"
           >
-            {galleryImages.map((image) => {
-              return (
+            {galleryImages.map((image) => (
+              <div key={image.id} className="flex lg:hover:scale-[1.05] transition-all ease-in-out duration-300 gap-y-2 flex-col">
                 <img
                   draggable={user ? true : false}
                   loading="lazy"
-                  key={image.id}
                   src={image.img}
-                  className="skeleton rounded-2xl w-full bg-cover bg-center bg-no-repeat h-[20em] m-auto"
-                  alt=""
+                  className="skeleton rounded-2xl w-full bg-cover bg-red-700 bg-center bg-no-repeat h-[20em] m-auto"
+                  alt={image.tags}
                 />
-              );
-            })}
+                <p className="text-red-700">
+                  TAGS: <span className="text-white">{image.tags}</span>
+                </p>
+              </div>
+            ))}
           </div>
         )}
       </div>

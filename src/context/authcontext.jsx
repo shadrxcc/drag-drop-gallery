@@ -1,10 +1,8 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { supabase } from "../../client";
 import PropTypes from "prop-types";
 
-const AuthContext = createContext({});
-
-export const useAuth = () => useContext(AuthContext);
+export const AuthContext = createContext({});
 
 const login = (email, password) =>
   supabase.auth.signInWithPassword({ email, password });
@@ -18,6 +16,8 @@ const AuthProvider = ({ children }) => {
       if (event === "SIGNED_IN") {
         setUser(session.user);
         setAuth(true);
+        sessionStorage.setItem("user_data", JSON.stringify(session.user));
+        
       } else if (event === "SIGNED_OUT") {
         setUser(null);
         setAuth(false);
@@ -29,7 +29,7 @@ const AuthProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, login }}>
+    <AuthContext.Provider value={{ user, auth, login }}>
       {children}
     </AuthContext.Provider>
   );

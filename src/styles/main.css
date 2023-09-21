@@ -76,13 +76,13 @@
 }
 
 #navbar {
-  transition: 0.7s ease-in-out;
+  transition: 3s ease-in-out;
 }
 
 #navbar.active {
   top: 0;
   z-index: 999;
-  transition: 0.7s ease-in-out;
+  transition: all 3s ease-in-out;
 }
 
 .skeleton {

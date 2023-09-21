@@ -56,116 +56,116 @@ export const images = [
   {
     id: 1,
     img: art2,
-    tags: "fashion",
+    tags: "art, graffiti",
   },
 
   {
     id: 2,
     img: art4,
-    tags: "fashion",
+    tags: "art, graffiti",
   },
 
   {
     id: 5,
     img: nature6,
-    tags: "fashion",
+    tags: "nature",
   },
   {
     id: 6,
     img: nature7,
-    tags: "fashion",
+    tags: "nature",
   },
   {
     id: 7,
     img: shoe5,
-    tags: "fashion",
+    tags: "fashion, shoes",
   },
   {
     id: 8,
     img: art5,
-    tags: "fashion",
+    tags: "art, graffiti",
   },
   {
     id: 9,
     img: shoe6,
-    tags: "fashion",
+    tags: "fashion, shoes",
   },
 
   {
     id: 10,
     img: tattoo4,
-    tags: "fashion",
+    tags: "ink, tattoo",
   },
 
   {
     id: 11,
     img: shoe1,
-    tags: "fashion",
+    tags: "fashion, shoes",
   },
 
   {
     id: 12,
     img: tattoo5,
-    tags: "fashion",
+    tags: "ink, tattoo",
   },
 
   {
     id: 13,
     img: tattoo3,
-    tags: "fashion",
+    tags: "ink, tattoo",
   },
 
   {
     id: 14,
     img: shoe4,
-    tags: "fashion",
+    tags: "fashion, shoes",
   },
   {
     id: 15,
     img: nature5,
-    tags: "fashion",
+    tags: "nature",
   },
   {
     id: 16,
     img: locs4,
-    tags: "fashion",
+    tags: "hair, locs",
   },
   {
     id: 17,
     img: grill4,
-    tags: "fashion",
+    tags: "fashion, luxury",
   },
   {
     id: 18,
     img: fit4,
-    tags: "fashion",
+    tags: "fashion, fits",
   },
   {
     id: 19,
     img: art6,
-    tags: "fashion",
+    tags: "art, graffiti",
   },
 
   {
     id: 20,
     img: art7,
-    tags: "fashion",
+    tags: "art, graffiti",
   },
 
   {
     id: 21,
     img: backdrop,
-    tags: "art",
+    tags: "art, musuem",
   },
   {
     id: 22,
     img: earth,
-    tags: "fashion",
+    tags: "art, musuem",
   },
   {
     id: 23,
     img: emma,
-    tags: "fashion",
+    tags: "art, museum",
   },
   {
     id: 24,
@@ -180,7 +180,7 @@ export const images = [
   {
     id: 26,
     img: national,
-    tags: "fashion",
+    tags: "art",
   },
   {
     id: 27,
@@ -190,129 +190,129 @@ export const images = [
   {
     id: 28,
     img: art,
-    tags: "fashion",
+    tags: "art, graffiti",
   },
 
   {
     id: 29,
     img: fit,
-    tags: "fashion",
+    tags: "fashion, luxury",
   },
   {
     id: 30,
     img: grill,
-    tags: "fashion",
+    tags: "fashion, luxury",
   },
   {
     id: 31,
     img: locs,
-    tags: "fashion",
+    tags: "hair, locs",
   },
   {
     id: 32,
     img: nature,
-    tags: "fashion",
+    tags: "nature",
   },
   {
     id: 33,
     img: nature1,
-    tags: "fashion",
+    tags: "nature",
   },
   {
     id: 34,
     img: shoe,
-    tags: "fashion",
+    tags: "fashion, shoes",
   },
 
   {
     id: 35,
     img: shoe1,
-    tags: "fashion",
+    tags: "fashion, shoes",
   },
 
   {
     id: 36,
     img: art1,
-    tags: "fashion",
+    tags: "art, graffiti",
   },
 
   {
     id: 37,
     img: fit2,
-    tags: "fashion",
+    tags: "fashion, luxury",
   },
   {
     id: 38,
     img: grill2,
-    tags: "fashion",
+    tags: "fashion, luxury",
   },
   {
     id: 39,
     img: locs1,
-    tags: "fashion",
+    tags: "hair, locs",
   },
   {
     id: 40,
     img: locs2,
-    tags: "fashion",
+    tags: "hair, locs",
   },
   {
     id: 41,
     img: nature2,
-    tags: "fashion",
+    tags: "nature",
   },
   {
     id: 42,
     img: shoe2,
-    tags: "fashion",
+    tags: "fashion, shoes",
   },
 
   {
     id: 43,
     img: tattoo,
-    tags: "fashion",
+    tags: "ink, tattoo",
   },
 
   {
     id: 44,
     img: art3,
-    tags: "fashion",
+    tags: "art, graffiti",
   },
 
   {
     id: 45,
     img: fit3,
-    tags: "fashion",
+    tags: "fashion, luxury",
   },
   {
     id: 46,
     img: grill3,
-    tags: "fashion",
+    tags: "fashion, luxury",
   },
   {
     id: 47,
     img: locs3,
-    tags: "fashion",
+    tags: "hair, locs",
   },
   {
     id: 48,
     img: nature3,
-    tags: "fashion",
+    tags: "nature",
   },
   {
     id: 49,
     img: nature4,
-    tags: "fashion",
+    tags: "nature",
   },
   {
     id: 50,
     img: shoe3,
-    tags: "fashion",
+    tags: "fashion, shoes",
   },
 
   {
     id: 51,
     img: tattoo2,
-    tags: "fashion",
+    tags: "ink, tattoo",
   },
 ];

@@ -29,6 +29,7 @@
 html body {
   margin: 0 auto;
   padding: 0;
+  width: 1005;
   box-sizing: border-box;
   overflow-x: hidden;
   font-family: quatrocento;
