@@ -32,7 +32,7 @@ const Library = () => {
       .then(() => {
         setLoading(true);
         console.log("successful");
-        sessionStorage.removeItem('authStatus')
+        sessionStorage.removeItem("authStatus");
         setMenuToggle(false);
       })
       .catch((error) => {
@@ -68,11 +68,15 @@ const Library = () => {
   }, [authUser]);
 
   const handleSearch = (e) => {
-    e.preventDefault();
-    if (tag.trim() === "") {
+    const inputValue = e.target.value;
+    setTag(inputValue);
+
+    if (inputValue.trim() === "") {
       setGalleryImages(images);
     } else {
-      const filteredImages = images.filter((image) => image.tags.includes(tag));
+      const filteredImages = images.filter((image) =>
+        image.tags.includes(inputValue)
+      );
       setNotFound(false);
       setGalleryImages(filteredImages);
       if (filteredImages.length === 0) {
@@ -126,11 +130,7 @@ const Library = () => {
           <div
             className={`flex justify-evenly w-full overflow-hidden fixed left-0 z-10 bg-black items-center`}
           >
-            <form
-              action="search"
-              onClick={handleSearch}
-              className="flex flex-[0.8_1_0] justify-center py-8 gap-x-1.5 items-center"
-            >
+            <div className="flex flex-[0.8_1_0] justify-center py-8 gap-x-1.5 items-center">
               <input
                 type="text"
                 value={tag}
@@ -138,12 +138,9 @@ const Library = () => {
                 name="text"
                 id="text"
                 placeholder="Search and filter by tags"
-                onChange={(e) => setTag(e.target.value)}
+                onChange={handleSearch}
               />
-              <button className="bg-white hover:scale-[1.1] transition-all ease-in-out duration-300 py-3 px-3 text-black rounded-lg">
-                Search
-              </button>
-            </form>
+            </div>
 
             <MdMenu
               className="sm:hidden"
