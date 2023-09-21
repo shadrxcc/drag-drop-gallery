@@ -16,9 +16,11 @@ const Signup = () => {
     e.preventDefault();
     createUserWithEmailAndPassword(auth, email, password)
       .then((usercredentials) => {
-        console.log(usercredentials);
         setSuccess("Account created uccessfully!");
-        navigate(`/login`);
+        console.log(usercredentials);
+        setTimeout(() => {
+          navigate(`/login`);
+        }, 1000);
       })
       .catch((error) => {
         console.log(error);
@@ -33,6 +35,8 @@ const Signup = () => {
         } else if (error.code === "auth/weak-password") {
           errorMessage =
             "Weak password. Password should be at least 6 characters.";
+        } else if (error.ocde === "auth/missing-password") {
+          errorMessage = "Missing-password. Please provide one.";
         }
         setError(errorMessage);
       })

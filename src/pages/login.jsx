@@ -16,13 +16,14 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
+    setLoading(true);
     signInWithEmailAndPassword(auth, email, password)
       .then((usercredentials) => {
-        setLoading(true);
-        console.log(usercredentials);
         setLoginSuccess("Sign in successful! Hold on a sec ;)");
-        navigate(`/`);
+        console.log(usercredentials);
+        setTimeout(() => {
+          navigate(`/`);
+        }, 1000);
       })
       .catch((error) => {
         console.log(error);
@@ -35,15 +36,15 @@ const Login = () => {
           errorMessage = "Invalid password. Please enter the correct password.";
         } else if (error.code === "auth/invalid-email") {
           errorMessage = "Invalid email address. Please enter a valid email.";
+        } else if (error.code === "auth/invalid-login-credentials") {
+          errorMessage = "Invalid login credentials. Check and try again.";
         }
-
         setError(errorMessage);
       })
       .finally(() => {
         setEmail("");
-        setError("");
         setPassword("");
-        setLoginSuccess("");
+        setLoading(false);
       });
   };
 

@@ -28,9 +28,9 @@ const Library = () => {
   const { authUser } = useAuth();
 
   const handleLogout = () => {
+    setLoading(true);
     signOut(auth)
       .then(() => {
-        setLoading(true);
         console.log("successful");
         sessionStorage.removeItem("authStatus");
         setMenuToggle(false);
