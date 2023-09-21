@@ -123,7 +123,7 @@ const Library = () => {
 
         <div className="relative mb-48">
           <div
-            className={`flex justify-evenly w-full overflow-hidden fixed left-0 z-10 bg-black sm:bg-transparent items-center`}
+            className={`flex justify-evenly w-full overflow-hidden fixed left-0 z-10 bg-black items-center`}
           >
             <form
               action="search"
