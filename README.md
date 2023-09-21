@@ -28,9 +28,11 @@ To get a local copy up and running, follow these simple steps:
 
 3. API key setup
 
-- Go to [TMDB](https://developer.themoviedb.org/reference/intro/getting-started)
-- Create an account and get your access token under the API section on your account settings.
-- Create a .env file in the root directory of your project and create your env variables as shown below. Replace 'Paste your access token' with your access token.
+- Go to [Supabase](https://supabase.com)
+- Create an account and create a project to get your API url and key.
+- Create a .env file in the root directory of your project, paste your API url and key as shown below.
+
+![.env file snippet](src/assets/env.png)
 
 4. Run project
 
