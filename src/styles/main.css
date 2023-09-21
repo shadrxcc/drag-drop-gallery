@@ -11,7 +11,7 @@
   background-repeat: no-repeat;
   background-size: cover;
   font-family: otto;
-  overflow: hidden;
+  overflow-y: auto;
 }
 
 #signup {
@@ -59,7 +59,7 @@
   background-repeat: no-repeat;
   background-size: cover;
   font-family: otto;
-  overflow-y: auto;
+  overflow-y: scroll;
 }
 
 #loader {
@@ -109,4 +109,21 @@
   100% {
     background-position: 100% 0;
   }
+}
+
+.cursor {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  position: fixed;
+  background-color: white;
+}
+
+.follower-cursor {
+  width: 20px;
+  height: 20px;
+  background-color: transparent;
+  border: 1px solid white;
+  position: fixed;
+  z-index: 999;
 }
