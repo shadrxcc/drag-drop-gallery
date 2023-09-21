@@ -3,7 +3,6 @@ import { images } from "./imagedata";
 import { MdMenu, MdClose } from "react-icons/md";
 import { BiLoader } from "react-icons/bi";
 import { Link } from "react-router-dom";
-// import { useAuth } from "../context/authcontext";
 import { Alert, AlertDescription, AlertIcon } from "@chakra-ui/react";
 import { supabase } from "../../client";
 import { gsap } from "gsap";
@@ -251,7 +250,10 @@ const Library = () => {
             className="grid drag py-10 grid-cols-2 sm:grid-cols-3 gap-y-5 gap-x-2 sm:gap-x-5 lg:grid-cols-4 xl:grid-cols-5"
           >
             {galleryImages.map((image) => (
-              <div key={image.id} className="flex lg:hover:scale-[1.05] transition-all ease-in-out duration-300 gap-y-2 flex-col">
+              <div
+                key={image.id}
+                className="flex lg:hover:scale-[1.05] transition-all ease-in-out duration-300 gap-y-2 flex-col"
+              >
                 <img
                   draggable={user ? true : false}
                   loading="lazy"
