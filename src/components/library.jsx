@@ -177,7 +177,7 @@ const Library = () => {
         {menutoggle && (
           <div
             id="navbar"
-            className={`absolute rounded-b-[2em] p-6 w-full flex sm:hidden left-0 top-[-22em] flex-col gap-y-10 bg-black text-white h-2/4 transition-transform ${
+            className={`fixed rounded-b-[2em] p-6 w-full flex sm:hidden left-0 top-[-22em] flex-col gap-y-10 bg-black text-white h-screen transition-transform ${
               menutoggle ? "#navbar active" : "#navbar"
             }`}
           >
