@@ -1,4 +1,4 @@
-# HNGx Stage 2 Task: MovieBox
+# HNGx Stage 3 Task: Drag and Drop Image Gallery
 
 A fully functional and responsive Drag-and-Drop Image gallery using React that showcases a collection of images in a visually appealing way. Users can view the gallery but cannot drop and drag images unless they are authenticated.
 
