@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { supabase } from "../../client";
 import { Alert, AlertIcon, AlertDescription } from "@chakra-ui/react";
 import { BiLoader } from "react-icons/bi";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../utils/firebase";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -16,29 +17,34 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    try {
-      setLoading(true);
-      const { error } = await supabase.auth.signInWithPassword({
-        email: email,
-        password: password,
-      });
-
-      if (error) {
-        setError("Error signing in. Please try again");
-        setLoading(false);
-        setInterval(() => {
-          setError("");
-        }, 2000);
-      } else {
+    signInWithEmailAndPassword(auth, email, password)
+      .then((usercredentials) => {
+        setLoading(true);
+        console.log(usercredentials);
         setLoginSuccess("Sign in successful! Hold on a sec ;)");
-        setLoading(false);
-        setInterval(() => {
-          navigate(`/`);
-        }, 2000);
-      }
-    } catch (error) {
-      setError('Error signing in' + error.message);
-    }
+        navigate(`/`);
+      })
+      .catch((error) => {
+        console.log(error);
+        let errorMessage = "Error signing in. Please try again.";
+
+        if (error.code === "auth/user-not-found") {
+          errorMessage =
+            "User not found. Please check your email and try again.";
+        } else if (error.code === "auth/wrong-password") {
+          errorMessage = "Invalid password. Please enter the correct password.";
+        } else if (error.code === "auth/invalid-email") {
+          errorMessage = "Invalid email address. Please enter a valid email.";
+        }
+
+        setError(errorMessage);
+      })
+      .finally(() => {
+        setEmail("");
+        setError("");
+        setPassword("");
+        setLoginSuccess("");
+      });
   };
 
   return (
@@ -67,7 +73,9 @@ const Login = () => {
         <span className="flex gap-y-2 flex-col">
           <label htmlFor="email">Email</label>
           <input
-            className={`${error ? 'border-red-600' : ''} bg-transparent px-2 outline-none py-2 rounded-lg border`}
+            className={`${
+              error ? "border-red-600" : ""
+            } bg-transparent px-2 outline-none py-2 rounded-lg border`}
             type="email"
             name="email"
             onChange={(e) => {
@@ -83,7 +91,9 @@ const Login = () => {
         <span className="flex gap-y-2 flex-col">
           <label htmlFor="password">Password</label>
           <input
-            className={`${error ? 'border-red-600' : ''} bg-transparent px-2 outline-none py-2 rounded-lg border`}
+            className={`${
+              error ? "border-red-600" : ""
+            } bg-transparent px-2 outline-none py-2 rounded-lg border`}
             type="password"
             name="password"
             value={password}

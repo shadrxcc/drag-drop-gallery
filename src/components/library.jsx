@@ -4,12 +4,13 @@ import { MdMenu, MdClose } from "react-icons/md";
 import { BiLoader } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { Alert, AlertDescription, AlertIcon } from "@chakra-ui/react";
-import { supabase } from "../../client";
 import { gsap } from "gsap";
 import Animatedintro from "./animatedintro";
 import Sortable from "sortablejs";
 import { useAuth } from "../context/useAuth";
 import Imagecomponent from "./imagecomponent";
+import { signOut } from "firebase/auth";
+import { auth } from "../utils/firebase";
 
 const Library = () => {
   const [galleryImages, setGalleryImages] = useState(images);
@@ -24,31 +25,23 @@ const Library = () => {
   const gridRef = useRef(null);
   const sortableJsRef = useRef(null);
 
-  const { user } = useAuth();
+  const { authUser } = useAuth();
 
-  const handleLogout = async (e) => {
-    e.preventDefault();
-    try {
-      setError("");
-      setLoading(true);
-
-      const { error } = await supabase.auth.signOut();
-      if (error) {
-        setError(error.message);
-      } else {
+  const handleLogout = () => {
+    signOut(auth)
+      .then(() => {
+        setLoading(true);
+        console.log("successful");
         setMenuToggle(false);
-        sessionStorage.removeItem("user_data");
-        window.location.reload(); // Temporal fix to stop the login page from flickering after signout :)
-      }
-    } catch (error) {
-      console.error(error);
-      setError("An error occurred during sign-out.");
-      setLoading(false);
-    } finally {
-      setError("");
-      setLoading(false);
-      e.preventDefault();
-    }
+      })
+      .catch((error) => {
+        console.log(error);
+        setError(error.message);
+      })
+      .finally(() => {
+        setError("");
+        setLoading(false);
+      });
   };
 
   const onListChange = () => {
@@ -65,13 +58,13 @@ const Library = () => {
       sortableJsRef.current.destroy(); // Destroy the sortable when not signed in
     }
 
-    if (user) {
+    if (authUser) {
       sortableJsRef.current = new Sortable(gridRef.current, {
         animation: 150,
         onEnd: onListChange,
       });
     }
-  }, [user]);
+  }, [authUser]);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -157,7 +150,7 @@ const Library = () => {
               color="white"
               size={30}
             />
-            {user ? (
+            {authUser ? (
               <button
                 onClick={handleLogout}
                 className="hidden p-3 border rounded-lg sm:block"
@@ -198,7 +191,7 @@ const Library = () => {
                 size={30}
               />
             </div>
-            {user ? (
+            {authUser ? (
               <button
                 className="py-2 text-xl rounded-lg border"
                 onClick={handleLogout}
@@ -225,7 +218,7 @@ const Library = () => {
           </div>
         )}
 
-        {user ? (
+        {authUser ? (
           <div className="flex px-1.5">
             <p className="items-center text-center text-xl sm:text-3xl mx-auto">
               Drag and drop images wherever you want :)
@@ -256,7 +249,7 @@ const Library = () => {
                 className="flex lg:hover:scale-[1.05] transition-all ease-in-out duration-300 gap-y-2 flex-col"
               >
                 <Imagecomponent
-                  draggable={user ? true : false}
+                  draggable={authUser ? true : false}
                   src={image.img}
                   alt={image.tags}
                 />

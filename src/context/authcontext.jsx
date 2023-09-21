@@ -1,35 +1,29 @@
 import { createContext, useEffect, useState } from "react";
-import { supabase } from "../../client";
 import PropTypes from "prop-types";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../utils/firebase";
 
 export const AuthContext = createContext({});
 
-const login = (email, password) =>
-  supabase.auth.signInWithPassword({ email, password });
-
 const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  const [auth, setAuth] = useState(false);
+  const [authUser, setAuthUser] = useState(null);
 
   useEffect(() => {
-    const { data } = supabase.auth.onAuthStateChange((event, session) => {
-      if (event === "SIGNED_IN") {
-        setUser(session.user);
-        setAuth(true);
-        sessionStorage.setItem("user_data", JSON.stringify(session.user));
-        
-      } else if (event === "SIGNED_OUT") {
-        setUser(null);
-        setAuth(false);
+    const listen = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setAuthUser(user)
+      } else {
+        setAuthUser(null)
       }
-    });
+    })
+
     return () => {
-      data.subscription.unsubscribe();
-    };
-  }, []);
+      listen()
+    }
+  }, [])
 
   return (
-    <AuthContext.Provider value={{ user, auth, login }}>
+    <AuthContext.Provider value={{ authUser }}>
       {children}
     </AuthContext.Provider>
   );

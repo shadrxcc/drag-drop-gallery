@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { supabase } from "../../client";
 import { Alert, AlertIcon, AlertDescription } from "@chakra-ui/react";
 import { Link, useNavigate } from "react-router-dom";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../utils/firebase";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
@@ -9,33 +10,36 @@ const Signup = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleSignup = async (e) => {
     e.preventDefault();
-    try {
-      const { error } = await supabase.auth.signUp({
-        email: email,
-        password: password,
-      });
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((usercredentials) => {
+        console.log(usercredentials);
+        setSuccess("Account created uccessfully!");
+        navigate(`/login`);
+      })
+      .catch((error) => {
+        console.log(error);
+        let errorMessage =
+          "An error occurred during sign-up. Please try again.";
 
-      if (error) {
-        setError("Error signing up. Please try again or check your network!");
-      } else {
-        setSuccess(
-          "Account created uccessfully!"
-        );
-        setInterval(() => {
-          navigate(`/login`)
-        }, 3000)
-      }
-    } catch (error) {
-      setError("Error signing up. Please try again or check your network!");
-    } finally {
-      setInterval(() => {
-        setError("");
-      }, 2000);
-    }
+        if (error.code === "auth/email-already-in-use") {
+          errorMessage =
+            "This email is already in use. Please use a different email.";
+        } else if (error.code === "auth/invalid-email") {
+          errorMessage = "Invalid email address. Please enter a valid email.";
+        } else if (error.code === "auth/weak-password") {
+          errorMessage =
+            "Weak password. Password should be at least 6 characters.";
+        }
+        setError(errorMessage);
+      })
+      .finally(() => {
+        setEmail("");
+        setPassword("");
+      });
   };
 
   return (
@@ -64,7 +68,9 @@ const Signup = () => {
         <span className="flex gap-y-2 flex-col">
           <label htmlFor="email">Email</label>
           <input
-            className={`${error ? 'border-red-600' : ''} bg-transparent px-2 outline-none py-2 rounded-lg border`}
+            className={`${
+              error ? "border-red-600" : ""
+            } bg-transparent px-2 outline-none py-2 rounded-lg border`}
             type="email"
             name="email"
             value={email}
@@ -80,7 +86,9 @@ const Signup = () => {
         <span className="flex gap-y-2 flex-col">
           <label htmlFor="password">Password</label>
           <input
-            className={`${error ? 'border-red-600' : ''} bg-transparent px-2 outline-none py-2 rounded-lg border`}
+            className={`${
+              error ? "border-red-600" : ""
+            } bg-transparent px-2 outline-none py-2 rounded-lg border`}
             type="password"
             name="password"
             value={password}
