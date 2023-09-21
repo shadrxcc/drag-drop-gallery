@@ -252,6 +252,10 @@ const Library = () => {
                     e.stopPropagation();
                     dragItem.current = index;
                   }}
+                  onTouchStart={(e) => {
+                    e.preventDefault(); // Prevent the default behavior of opening the image as a URL on mobile
+                    dragItem.current = index;
+                  }}
                   onDragEnter={(e) => {
                     e.stopPropagation();
                     dragOverItem.current = index;
