@@ -10,8 +10,21 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  font-family: otto;
+  font-family: clash;
   overflow-y: auto;
+}
+
+.bgb {
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.9) 0%,
+    rgba(0, 0, 0, 0.9) 100%
+  ),
+  url("/src/assets/national.webp"), lightgray;
+border: 0;
+background-position: bottom;
+background-repeat: no-repeat;
+background-size: cover;
 }
 
 #signup {
@@ -26,15 +39,15 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  font-family: otto;
+  font-family: clash;
   overflow: hidden;
 }
 
 #login {
   background: linear-gradient(
       0deg,
-      rgba(0, 0, 0, 0.8) 0%,
-      rgba(0, 0, 0, 0.8) 100%
+      rgba(0, 0, 0, .93) 0%,
+      rgba(0, 0, 0, 0.93) 100%
     ),
     url("/src/assets/gwen.webp"), lightgray;
   width: 100%;
@@ -42,7 +55,7 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  font-family: otto;
+  font-family: clash;
   overflow: hidden;
 }
 
@@ -58,7 +71,7 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  font-family: otto;
+  font-family: clash;
   overflow-y: scroll;
 }
 

@@ -26,15 +26,34 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: clash;
+  src: url(/src/assets/fonts/ClashDisplay-Variable.ttf);
+  font-display: swap;
+}
+
+@font-face {
+  font-family: otto;
+  src: url(/src/assets/fonts/OTTOATTACTYPE.ttf);
+  font-display: swap;
+}
+
 html body {
   margin: 0 auto;
   padding: 0;
-  width: 1005;
+  cursor: none;
+  width: 100%;
   box-sizing: border-box;
   overflow-x: hidden;
-  font-family: quatrocento;
+  font-family: clash;
   color: white;
 }
+
+#quatro {
+ font-family: clash;
+}
+
+
 
 .drag {
   cursor: grab;

@@ -20,10 +20,13 @@ const Library = () => {
   const [loading, setLoading] = useState(false);
   const [notfound, setNotFound] = useState(false);
 
+  const [navbarVisible, setNavbarVisible] = useState(true); // Initially set to true or false based on your requirements
+
   const splitRef = useRef(null);
   const preloaderRef = useRef(null);
   const gridRef = useRef(null);
   const sortableJsRef = useRef(null);
+  const navRef = useRef(null);
 
   const { authUser } = useAuth();
 
@@ -88,6 +91,12 @@ const Library = () => {
   useEffect(() => {
     const split = splitRef.current;
     const preloader = preloaderRef.current;
+    const nav = navRef.current;
+
+    setTimeout(() => {
+      nav.style.display = "block";
+      setNavbarVisible(true);
+    }, 1000); // Adjust the delay as needed
 
     gsap.fromTo(
       preloader,
@@ -98,6 +107,7 @@ const Library = () => {
         delay: 3.5,
         onComplete: () => {
           preloader.style.display = "none";
+          nav.style.position = "fixed";
         },
       }
     );
@@ -118,7 +128,7 @@ const Library = () => {
 
   return (
     <>
-      <div id="library" className="px-3 relative sm:px-5">
+      <div ref={navRef} id="library" className="px-3 relative sm:px-5">
         {error && (
           <Alert className="rounded-lg text-black" status="error">
             <AlertIcon />
@@ -128,7 +138,7 @@ const Library = () => {
 
         <div className="relative mb-48">
           <div
-            className={`flex justify-evenly w-full overflow-hidden fixed left-0 z-10 bg-black items-center`}
+            className={`flex justify-evenly fixed w-full overflow-hidden left-0 z-10 bgb items-center`}
           >
             <div className="flex flex-[0.8_1_0] justify-center py-8 gap-x-1.5 items-center">
               <input
@@ -251,8 +261,8 @@ const Library = () => {
                   src={image.img}
                   alt={image.tags}
                 />
-                <p className="text-red-700">
-                  TAGS: <span className="text-white">{image.tags}</span>
+                <p id="quatro" className="text-red-700">
+                  <span className="text-white">{image.tags}</span>
                 </p>
               </div>
             ))}
